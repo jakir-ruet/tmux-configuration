@@ -101,7 +101,7 @@ command -v tmux
   |  23   | `: setw synchronize-panes`                                      | toggle synchronize-panes(send command to all panes)                                           |
   |  24   | `control + b spacebar`                                          | toggle between pane layouts                                                                   |
 
-Copy Mode (: setw -g mode-keys vi) use vi keys in buffer:
+Other essential command (: setw -g mode-keys vi) use vi keys in buffer:
   Panes take my development time from bland to awesome.
   |  SL   | Command                 | Explanation                                            |
   | :---: | :---------------------- | :----------------------------------------------------- |
