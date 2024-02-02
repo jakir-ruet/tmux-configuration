@@ -19,9 +19,81 @@ sudo apt-get install tmux
 brew update
 brew install tmux
 ```
+https://github.com/tmux-plugins/tpm
+#### Version Check
+```bash
+tmux -V
+```
 #### Terminal use as tmux
 ```bash
 tmux
+```
+#### Check location
+```bash
+command -v tmux
+```
+
+### tmux consist three sections
+- Session: 
+  It is collection of windows (terminal). each session has a active window. Sessions are useful for completely separating work environments.
+  tmux new -s session_name
+  |  SL   | Command                       | Explanation                                             |
+  | :---: | :---------------------------- | :------------------------------------------------------ |
+  |   1   | `tmux new -s session_name`    | creates a new tmux session named session_name           |
+  |   2   | `tmux attach -t session_name` | creates a new tmux session named session_name           |
+  |   3   | `tmux switch -t session_name` | attaches to an existing tmux session named session_name |
+  |   4   | `tmux list-sessions`          | lists existing tmux sessions                            |
+  |   5   | `tmux detach (prefix + d)`    | detach the currently attached session                   |
+
+- Window: 
+  It is container of panes. tmux has a tabbed interface, but it calls its tabs “Windows”.
+  |  SL   | Command                                     | Explanation                       |
+  | :---: | :------------------------------------------ | :-------------------------------- |
+  |   1   | `tmux new-window (prefix + c)`              | create a new window               |
+  |   2   | `tmux select-window -t :0-9 (prefix + 0-9)` | move to the window based on index |
+  |   3   | `tmux rename-window (prefix + ,)`           | rename the current window         |
+
+- Pane:
+  Panes take my development time from bland to awesome.
+  |  SL   | Command                                    | Explanation                                        |
+  | :---: | :----------------------------------------- | :------------------------------------------------- |
+  |   1   | `tmux split-window (prefix + ")`           | splits the window into two vertical panes          |
+  |   2   | `tmux split-window -h (prefix + %)`        | splits the window into two horizontal panes        |
+  |   3   | `tmux swap-pane -[UDLR] (prefix + { or })` | swaps pane with another in the specified direction |
+  |   4   | `tmux select-pane -[UDLR]`                 | selects the next pane in the specified direction   |
+  |   5   | `tmux select-pane -t :.+`                  | selects the next pane in numerical order           |
+#### Architecture Terminal Multiplexer (tmux)
+![Architecture Terminal Multiplexer (tmux)](/img/tmux-server.png)
+
+#### Other Essential tmux Commands
+|  SL   | Command              | Explanation                                            |
+| :---: | :------------------- | :----------------------------------------------------- |
+|   1   | `tmux list-keys`     | lists out every bound key and the tmux command it runs |
+|   2   | `tmux list-commands` | lists out every tmux command and its arguments         |
+|   3   | `tmux info`          | lists out every session, window, pane, its pid, etc.   |
+
+#### Essential tmux configuration in `.tmux.conf`
+```bash
+nano ~/.tmux.conf
+```
+```bash
+# remap prefix to Control + a
+set -g prefix C-a
+unbind C-b
+bind C-a send-prefix
+
+# force a reload of the config file
+unbind r
+bind r source-file ~/.tmux.conf
+
+# quick pane cycling
+unbind ^A
+bind ^A select-pane -t :.+
+```
+
+#### Exit from a window
+```bash
+exit
 ```
 
 ### Courtesy of Jakir
