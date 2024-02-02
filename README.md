@@ -19,7 +19,10 @@ sudo apt-get install tmux
 brew update
 brew install tmux
 ```
+##### Tmux Plugin Manager Install
+
 https://github.com/tmux-plugins/tpm
+
 #### Version Check
 ```bash
 tmux -V
