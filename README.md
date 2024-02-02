@@ -35,18 +35,30 @@ tmux
 ```bash
 command -v tmux
 ```
+### Lets Get Started (t target, a > attach, i > index no )
+  |  SL   | Command                                                                                    | Explanation                                             |
+  | :---: | :----------------------------------------------------------------------------------------- | :------------------------------------------------------ |
+  |   1   | `tmux \ tmux new \ tmux new-session`                                                       | start new as tmux                                       |
+  |   2   | `tmux a or tmux at or tmux attach or  tmux attach-session`                                 | attach to last sessions                                 |
+  |   3   | `tmux a -t session_name`                                                                   | creates a new tmux session by session-name              |
+  |   4   | `tmux ls or tmux list-sessions`                                                            | list of sessions                                        |
+  |   5   | `tmux new -s session-name`                                                                 | new session by session name                             |
+  |   6   | `tmux kill-ses -t session-name or tmux kill-session -t session-name`                       | kill/delete by session name                             |
+  |   7   | `tmux a -t session-name or tmux at -t session-name or tmux attach-session -t session-name` | attach to a session by session-name                     |
+  |   5   | `tmux kill-session i`                                                                      | kill a indexed session                                  |
+  |   7   | `tmux kill-session -a`                                                                     | kill/delete current session by session-name             |
+  |   7   | `tmux kill-session -a -t session-name`                                                     | kill/delete all sessions by session-name                |
+  |   7   | `control + b w`                                                                            | session and window preview                              |
+  |   7   | `control + b (`                                                                            | move to previous session                                |
+  |   7   | `control + b )`                                                                            | move to next session                                    |
+  |   2   | `tmux attach -t session_name`                                                              | creates a new tmux session named session_name           |
+  |   3   | `tmux switch -t session_name`                                                              | attaches to an existing tmux session named session_name |
+  |   6   | `tmux detach (ctl + D)`                                                                    | detach the currently attached session (MacOS)           |
+  |   7   | `tmux a -t 0`                                                                              | a for attach, t for target, 0 for zero pane index       |
 
 ### tmux consist three sections
 - Session: 
   It is collection of windows (terminal). each session has a active window. Sessions are useful for completely separating work environments.
-  tmux new -s session_name
-  |  SL   | Command                       | Explanation                                             |
-  | :---: | :---------------------------- | :------------------------------------------------------ |
-  |   1   | `tmux new -s session_name`    | creates a new tmux session named session_name           |
-  |   2   | `tmux attach -t session_name` | creates a new tmux session named session_name           |
-  |   3   | `tmux switch -t session_name` | attaches to an existing tmux session named session_name |
-  |   4   | `tmux list-sessions`          | lists existing tmux sessions                            |
-  |   5   | `tmux detach (prefix + d)`    | detach the currently attached session                   |
 
 - Window: 
   It is container of panes. tmux has a tabbed interface, but it calls its tabs “Windows”.
@@ -65,6 +77,7 @@ command -v tmux
   |   3   | `tmux swap-pane -[UDLR] (prefix + { or })` | swaps pane with another in the specified direction |
   |   4   | `tmux select-pane -[UDLR]`                 | selects the next pane in the specified direction   |
   |   5   | `tmux select-pane -t :.+`                  | selects the next pane in numerical order           |
+
 #### Architecture Terminal Multiplexer (tmux)
 ![Architecture Terminal Multiplexer (tmux)](/img/tmux-server.png)
 
@@ -74,25 +87,6 @@ command -v tmux
 |   1   | `tmux list-keys`     | lists out every bound key and the tmux command it runs |
 |   2   | `tmux list-commands` | lists out every tmux command and its arguments         |
 |   3   | `tmux info`          | lists out every session, window, pane, its pid, etc.   |
-
-#### Essential tmux configuration in `.tmux.conf`
-```bash
-nano ~/.tmux.conf
-```
-```bash
-# remap prefix to Control + a
-set -g prefix C-a
-unbind C-b
-bind C-a send-prefix
-
-# force a reload of the config file
-unbind r
-bind r source-file ~/.tmux.conf
-
-# quick pane cycling
-unbind ^A
-bind ^A select-pane -t :.+
-```
 
 #### Exit from a window
 ```bash
